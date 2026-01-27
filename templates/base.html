@@ -1,0 +1,223 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>LOOG</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ここにサイト説明を入れます">
+<link rel="stylesheet" href="{% static 'book/css/style.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <title>LOOG - Minimalist Life Log Service</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="日々の努力を可視化しよう">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<section class="post-display-bg">
+	
+	</section>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=Noto+Serif+JP:wght@400;700&family=Montserrat:wght@300;600&display=swap');
+        
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #fcfcfc;
+            color: #1a1a1a;
+        }
+        .font-serif-jp { font-family: 'Noto Serif JP', serif; }
+        .font-logo { font-family: 'Montserrat', sans-serif; letter-spacing: 0.3em; }
+
+        /* スライドショーの簡易再現 */
+        .hero-bg {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-image 2s ease-in-out;
+            height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            /* 初期背景画像を設定（プレースホルダではなく具体的なもの） */
+            background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&q=80&w=2000');
+        }
+
+        /* 縦向きの新規記録ボタン（テンプレート再現） */
+        #btn-special {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+        #btn-special a {
+            writing-mode: vertical-rl;
+            background: #1a1a1a;
+            color: #fff;
+            padding: 20px 10px;
+            letter-spacing: 0.3em;
+            font-size: 12px;
+            text-decoration: none;
+            transition: 0.3s;
+            display: block;
+        }
+        #btn-special a:hover {
+            background: #444;
+        }
+
+        /* ミニマルロゴアイコン */
+        .logo-symbol {
+            display: inline-flex;
+            align-items: center;
+            position: relative;
+            width: 30px;
+            height: 20px;
+        }
+        .logo-circle {
+            position: absolute;
+            border: 1.5px solid currentColor;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+        }
+        .logo-circle-1 { left: 0; }
+        .logo-circle-2 { left: 10px; opacity: 0.4; }
+
+        .spin {
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* カードのホバーアニメーション */
+        .archive-card {
+            transition: transform 0.4s ease, border-color 0.4s ease;
+        }
+        .archive-card:hover {
+            transform: translateY(-5px);
+            border-color: #d1d5db;
+        }
+    </style>
+</head>
+  <body>
+      <div class="p4">
+        <h1>{% block h1 %}{% endblock %}</h1>
+        {% block content %}{% endblock content %}
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    </body>
+    <footer>
+
+<div class="text">
+
+<div>
+<h4>Company</h4>
+<p>東京都新宿区歌舞伎町三宮神社ビル3F<br>
+電話番号  03-0000-0000<br>
+営業時間  11:00〜19:00<br>
+定休日 水曜日</p>
+</div>
+
+<div>
+<h4>Follow Us</h4>
+<ul class="icons">
+<li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+<li><a href="#"><i class="fab fa-line"></i></a></li>
+<li><a href="#"><i class="fab fa-youtube"></i></a></li>
+<li><a href="#"><i class="fab fa-instagram"></i></a></li>
+</ul>
+</div>
+
+</div>
+
+<div class="image">
+<!-- <p class="logo"><img src="images/logo_kazari.svg" alt=""></p> -->
+<p class="logo"><img src="images/images-16.jpeg" alt=""></p>
+
+<small>&copy; sitename</small>
+</div>
+
+</footer>
+<!--▲▲▲▲▲ここまで「フッター」-->
+
+
+
+<!--テンプレートの著作。削除しないで下さい。-->
+<span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
+
+
+
+</div>
+<!--/#container-->
+
+<!--▼▼▼▼▼ ヘッダー -->
+<header class="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 h-20 flex items-center px-8 border-b border-stone-50">
+	<div class="max-w-7xl mx-auto w-full flex justify-between items-center">
+		<img class="logo2" src="{% static 'book/img/small_logo.png' %}">
+		<h1 id="logo">
+			<a href="#" class="flex items-center gap-3">
+			</a>
+        </h1>
+        <div class="relative_group relative_buttan">
+            <p style="margin-top: 15px;">
+                <a href="{% url 'index' %}">ホームに戻る</a>
+                </p>
+            </div>
+        </div>
+</header>
+
+<!--開閉ボタン（ハンバーガーアイコン）-->
+<div id="menubar_hdr">
+<div class="menu-icon">
+<span></span><span></span>
+</div>
+</div>
+
+
+
+<!--開閉ブロック-->
+<div id="menubar" class="menubarset">
+
+<nav>
+<ul>
+<li><a href="#kodawari">プロフィール</a></li>
+<li><a href="#course">アカウント</a>
+	<ul>
+	<li><a href="#">プライバシー</a></li>
+	<li><a href="#">アカウント設定</a></li>
+	<li><a href="#">あなたの情報とアクセス許可</a></li>
+	</ul>
+</li>
+<li><a href="#faq">アクティビティ</a></li>
+<li><a href="#koe">アクセシビリティ</a></li>
+<li><a href="contact.html">お知らせ</a></li>
+<li><a href="#">ヘルプ</a></li>
+
+</ul>
+</nav>
+
+<p>ここのブロックは、htmlの下の方にある&lt;div id=&quot;menubar&quot;&gt;で編集できます。<br>
+ヘッダーのメニューとは別のブロックになるので注意して下さい。</p>
+
+</div>
+<!--/#menubar-->
+
+
+
+<!--jQueryの読み込み-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!--パララックス（inview）-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/protonet-jquery.inview/1.1.2/jquery.inview.min.js"></script>
+<script src="{% static 'book/js/jquery.inview_set.js' %}"></script>
+
+<!--このテンプレート専用のスクリプト-->
+<script src="{% static 'book/js/main.js' %}"></script>
+
+</body>
+</html>
+
+</html>

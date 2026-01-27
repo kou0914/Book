@@ -1,0 +1,285 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>LOOG</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ここにサイト説明を入れます">
+<link rel="stylesheet" href="{% static 'book/css/style.css' %}">
+<head>
+    <meta charset="UTF-8">
+    <title>LOOG - Minimalist Life Log Service</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="日々の努力を可視化しよう">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!--投稿画面-->
+	<section class="post-display-bg">
+        <h2 class="c"><span class="main-text">LOOGS</span></h2>
+    
+        <div class="insta-feed-container">
+            {% for ob in object_list %}
+            <article class="feed-item">
+                <div class="feed-header">
+                    <span class="feed-date">{{ ob.created_at|date:"Y年m月d日" }}</span>
+                </div>
+    
+                <div class="feed-media">
+                    {% if ob.video %}
+                        <video controls muted playsinline>
+                            <source src="{{ ob.video.url }}" type="video/mp4">
+                        </video>
+                    {% elif ob.thumbnail %}
+                        <img src="{{ ob.thumbnail.url }}" alt="{{ ob.title }}">
+                    {% else %}
+                        <img src="{% static 'book/img/no-image.jpg' %}" alt="no image">
+                    {% endif %}
+                </div>
+    
+                <div class="feed-text">
+                    <h3 class="feed-title">{{ ob.title }}</h3>
+                    <div class="feed-description">
+                        <p>{{ ob.content|linebreaksbr }}</p>
+                    </div>
+                </div>
+            </article>
+            {% empty %}
+            <p class="c">まだ投稿がありません。</p>
+            {% endfor %}
+        </div>
+    </section>
+    <!--投稿画面ここまで-->
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=Noto+Serif+JP:wght@400;700&family=Montserrat:wght@300;600&display=swap');
+        
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #fcfcfc;
+            color: #1a1a1a;
+        }
+        .font-serif-jp { font-family: 'Noto Serif JP', serif; }
+        .font-logo { font-family: 'Montserrat', sans-serif; letter-spacing: 0.3em; }
+
+        /* スライドショーの簡易再現 */
+        .hero-bg {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-image 2s ease-in-out;
+            height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            /* 初期背景画像を設定（プレースホルダではなく具体的なもの） */
+            background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&q=80&w=2000');
+        }
+
+        /* 縦向きの新規記録ボタン（テンプレート再現） */
+        #btn-special {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+        }
+        #btn-special a {
+            writing-mode: vertical-rl;
+            background: #1a1a1a;
+            color: #fff;
+            padding: 20px 10px;
+            letter-spacing: 0.3em;
+            font-size: 12px;
+            text-decoration: none;
+            transition: 0.3s;
+            display: block;
+        }
+        #btn-special a:hover {
+            background: #444;
+        }
+
+        /* ミニマルロゴアイコン */
+        .logo-symbol {
+            display: inline-flex;
+            align-items: center;
+            position: relative;
+            width: 30px;
+            height: 20px;
+        }
+        .logo-circle {
+            position: absolute;
+            border: 1.5px solid currentColor;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+        }
+        .logo-circle-1 { left: 0; }
+        .logo-circle-2 { left: 10px; opacity: 0.4; }
+
+        .spin {
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* カードのホバーアニメーション */
+        .archive-card {
+            transition: transform 0.4s ease, border-color 0.4s ease;
+        }
+        .archive-card:hover {
+            transform: translateY(-5px);
+            border-color: #d1d5db;
+        }
+    </style>
+</head>
+    <main>
+        <!--▼▼▼▼▼ コンセプト (Our Values) -->
+        <section class="max-w-6xl mx-auto py-32 px-8 flex flex-col md:flex-row items-center gap-20" id="kodawari">
+            <div class="md:w-1/2 space-y-8">
+                <p class="text-[10px] tracking-[0.5em] text-stone-300 uppercase font-bold">Our Values</p>
+                <h2 class="text-3xl font-serif-jp leading-relaxed tracking-widest">
+                    <span class="block text-sm text-stone-400 mb-2">Concept</span>
+                    日々の記録を残そう
+                </h2>
+                <div class="space-y-6 text-sm text-stone-500 leading-loose font-light">
+                    <p>日常のなかで見落としてしまいそうな小さな気づきや感情。それらを言葉として残しておくことで、いつか振り返った時の力になります。</p>
+                    <p>LOOGは、あなたのための静かな記録の場です。飾る必要も、誰かに見せる必要もありません。ありのままの自分を、ここに置いておいてください。</p>
+                </div>
+                <div class="pt-6">
+                    <a href="#archive" class="inline-block border border-black px-12 py-4 text-[10px] tracking-widest uppercase hover:bg-black hover:text-white transition-all">アーカイブを見る</a>
+                </div>
+            </div>
+            <div class="md:w-1/2 grid grid-cols-2 gap-4">
+                <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&q=80&w=800" alt="ノートの画像" class="w-full h-80 object-cover rounded-sm grayscale">
+                <img src="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&q=80&w=800" alt="光の画像" class="w-full h-80 object-cover rounded-sm grayscale mt-12">
+            </div>
+        </section>
+<!--▲▲▲▲▲ここまで「コースのご案内」-->
+</main>
+
+
+
+<!--▼▼▼▼▼ここから「フッター」-->
+<footer>
+
+<div class="text">
+
+<div>
+<h4>Company</h4>
+<p>東京都新宿区歌舞伎町三宮神社ビル3F<br>
+電話番号  03-0000-0000<br>
+営業時間  11:00〜19:00<br>
+定休日 水曜日</p>
+</div>
+
+<div>
+<h4>Follow Us</h4>
+<ul class="icons">
+<li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+<li><a href="#"><i class="fab fa-line"></i></a></li>
+<li><a href="#"><i class="fab fa-youtube"></i></a></li>
+<li><a href="#"><i class="fab fa-instagram"></i></a></li>
+</ul>
+</div>
+
+</div>
+
+<div class="image">
+<p class="logo"><img src="images/logo_kazari.svg" alt=""></p>
+<small>&copy; sitename</small>
+</div>
+
+</footer>
+<!--▲▲▲▲▲ここまで「フッター」-->
+
+
+
+<!--テンプレートの著作。削除しないで下さい。-->
+<span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
+
+
+
+</div>
+<!--/#container-->
+
+<!--▼▼▼▼▼ ヘッダー -->
+<header class="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 h-20 flex items-center px-8 border-b border-stone-50">
+	<div class="max-w-7xl mx-auto w-full flex justify-between items-center">
+		<img class="logo2" src="{% static 'book/img/small_logo.png' %}">
+		<h1 id="logo">
+			<a href="#" class="flex items-center gap-3">
+			</a>
+		</h1>
+		<nav class="hidden md:block menyu_bar">
+			<ul class="flex gap-10 text-[10px] font-bold uppercase tracking-[0.3em] text-stone-400">
+					<li class="nav-post-btn">
+						<a href="{% url 'create-book' %}"><span>＋</span>新規投稿</a>
+					</li>
+				<li class="relative group">
+					<a href="#" class="hover:text-black transition-colors flex items-center gap-1">Account</a>
+					<ul class="absolute hidden group-hover:block bg-white border border-stone-100 p-4 w-40 mt-2 space-y-4 shadow-sm right-0">
+						<li><a href="#" class="hover:text-black">アカウント切り替え</a></li>
+						<li><a href="#" class="hover:text-black">アカウント設定</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<!--開閉ボタン（ハンバーガーアイコン）-->
+<div id="menubar_hdr">
+<div class="menu-icon">
+<span></span><span></span>
+</div>
+</div>
+
+
+
+<!--開閉ブロック-->
+<div id="menubar" class="menubarset">
+
+<nav>
+<ul>
+<li><a href="#kodawari">プロフィール</a></li>
+<li><a href="#course">アカウント</a>
+	<ul>
+	<li><a href="#">プライバシー</a></li>
+	<li><a href="#">アカウント設定</a></li>
+	<li><a href="#">あなたの情報とアクセス許可</a></li>
+	</ul>
+</li>
+<li><a href="#faq">アクティビティ</a></li>
+<li><a href="#koe">アクセシビリティ</a></li>
+<li><a href="contact.html">お知らせ</a></li>
+<li><a href="#">ヘルプ</a></li>
+
+</ul>
+</nav>
+
+<p>ここのブロックは、htmlの下の方にある&lt;div id=&quot;menubar&quot;&gt;で編集できます。<br>
+ヘッダーのメニューとは別のブロックになるので注意して下さい。</p>
+
+</div>
+<!--/#menubar-->
+
+
+
+<!--jQueryの読み込み-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!--パララックス（inview）-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/protonet-jquery.inview/1.1.2/jquery.inview.min.js"></script>
+<script src="{% static 'book/js/jquery.inview_set.js' %}"></script>
+
+<!--このテンプレート専用のスクリプト-->
+<script src="{% static 'book/js/main.js' %}"></script>
+
+</body>
+</html>

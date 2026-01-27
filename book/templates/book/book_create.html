@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}LOOG作成{% endblock %}
+{% block content %}
+<section id="log-app">
+
+    <h2 class="c"><span class="main-text">活動LOOG記録</span><span class="sub-text">Activity Logs</span></h2>
+
+    <div class="log-form-container">
+        <h3>自分の成果を投稿する</h3>
+        <form action="" method="post" class="log-form">
+            {% csrf_token %} <div class="form-group">
+                <label for="log-date">日付</label>
+                <input type="date" id="log-date" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="log-title">タイトル</label>
+                <input type="text" id="log-title" name="title" placeholder="例：本日のトレーニング記録" required>
+            </div>
+            <div class="form-group">
+                <label for="log-content">内容</label>
+                <textarea id="log-content" name="content" rows="4" placeholder="具体的な内容を入力してください..." required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="log-image">動画、写真の追加</label>
+                <input type="file" id="log-image" name="thumbnail" accept="image/*">
+            </div>
+            <ul class="flex gap-10 text-[10px] font-bold uppercase tracking-[0.3em] text-stone-400">
+                <li class="nav-post-btn">
+                    <a href="{% url 'create-book' %}"><span>＋</span> 投稿する</a>
+                </li>
+        </form>
+    </div>
+
+{% endblock content %}
