@@ -1,34 +1,48 @@
 {% extends "base.html" %}
 {% block title %}LOOG作成{% endblock %}
 {% block content %}
-<section id="log-app">
+<section id="log-app" class="pt-32 pb-20 px-8">
 
-    <h2 class="c"><span class="main-text">活動LOOG記録</span><span class="sub-text">Activity Logs</span></h2>
+    <h2 class="text-3xl font-serif-jp text-center mb-12">
+        <span class="block text-stone-800">活動LOOG記録</span>
+        <span class="text-sm text-stone-400 uppercase tracking-widest">Activity Logs</span>
+    </h2>
 
-    <div class="log-form-container">
-        <h3>自分の成果を投稿する</h3>
-        <form action="" method="post" class="log-form">
-            {% csrf_token %} <div class="form-group">
-                <label for="log-date">日付</label>
-                <input type="date" id="log-date" name="date" required>
-            </div>
+    <div class="max-w-2xl mx-auto bg-white p-8 border border-stone-100 shadow-sm">
+        <h3 class="text-lg font-bold mb-6 border-b pb-2">自分の成果を投稿する</h3>
+        <form action="" method="post" enctype="multipart/form-data" class="space-y-6">
+            {% csrf_token %}
+            
             <div class="form-group">
-                <label for="log-title">タイトル</label>
-                <input type="text" id="log-title" name="title" placeholder="例：本日のトレーニング記録" required>
+                <label for="id_title" class="block text-sm font-medium text-stone-700 mb-1">タイトル</label>
+                <input type="text" id="id_title" name="title" class="w-full border border-stone-200 p-2 rounded-sm focus:outline-none focus:border-stone-400" placeholder="例：本日のトレーニング記録" required>
             </div>
+
             <div class="form-group">
-                <label for="log-content">内容</label>
-                <textarea id="log-content" name="content" rows="4" placeholder="具体的な内容を入力してください..." required></textarea>
+                <label for="id_text" class="block text-sm font-medium text-stone-700 mb-1">内容</label>
+                <textarea id="id_text" name="text" rows="4" class="w-full border border-stone-200 p-2 rounded-sm focus:outline-none focus:border-stone-400" placeholder="具体的な内容を入力してください..." required></textarea>
             </div>
+
             <div class="form-group">
-                <label for="log-image">動画、写真の追加</label>
-                <input type="file" id="log-image" name="thumbnail" accept="image/*">
+                <label for="id_category" class="block text-sm font-medium text-stone-700 mb-1">カテゴリー</label>
+                <select id="id_category" name="category" class="w-full border border-stone-200 p-2 rounded-sm focus:outline-none focus:border-stone-400" required>
+                    <option value="work out">ワークアウト</option>
+                    <option value="study">勉強</option>
+                    <option value="other">その他</option>
+                </select>
             </div>
-            <ul class="flex gap-10 text-[10px] font-bold uppercase tracking-[0.3em] text-stone-400">
-                <li class="nav-post-btn">
-                    <a href="{% url 'create-book' %}"><span>＋</span> 投稿する</a>
-                </li>
+
+            <div class="form-group">
+                <label for="id_thumbnail" class="block text-sm font-medium text-stone-700 mb-1">写真の追加</label>
+                <input type="file" id="id_thumbnail" name="thumbnail" class="w-full text-sm text-stone-500 file:mr-4 file:py-2 file:px-4 file:rounded-sm file:border-0 file:text-sm file:font-semibold file:bg-stone-50 file:text-stone-700 hover:file:bg-stone-100" accept="image/*">
+            </div>
+
+            <div class="pt-4">
+                <button type="submit" class="w-full bg-black text-white py-3 text-xs tracking-[0.3em] uppercase font-bold hover:bg-stone-800 transition-colors">
+                    投稿する
+                </button>
+            </div>
         </form>
     </div>
-
+</section>
 {% endblock content %}

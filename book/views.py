@@ -26,8 +26,7 @@ class CreateBookView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-
-        return super() .form_valid(form)
+        return super().form_valid(form)
 
 class DeleteBookView(LoginRequiredMixin, DeleteView):
     template_name = "book/book_confirm_delete.html"
